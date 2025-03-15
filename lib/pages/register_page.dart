@@ -1,19 +1,17 @@
 import 'package:chatapp/components/my_button.dart';
 import 'package:chatapp/components/my_textfield.dart';
-import 'package:chatapp/pages/login_page.dart';
 import 'package:flutter/material.dart';
 
 class RegisterPage extends StatelessWidget {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confirmPasswordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
 
-    RegisterPage({super.key});
+  final void Function()? onTap;
+  RegisterPage({super.key,required this.onTap});
 
-
-      void register(){
-
-      }
+  void register() {}
 
   @override
   Widget build(BuildContext context) {
@@ -64,29 +62,34 @@ class RegisterPage extends StatelessWidget {
               obscurText: true,
               controllerText: _confirmPasswordController,
             ),
-            SizedBox(height: 25,),
+            SizedBox(
+              height: 25,
+            ),
             //button login
             MyButton(text: "Register", onTap: register),
-            SizedBox(height: 25,),
+            SizedBox(
+              height: 25,
+            ),
             //register now
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text("Already have an account ? ",
-                style: TextStyle(color: Theme.of(context).colorScheme.primary),),
+                Text(
+                  "Already have an account ? ",
+                  style:
+                      TextStyle(color: Theme.of(context).colorScheme.primary),
+                ),
                 GestureDetector(
-                  onTap: () => Navigator.push(context,MaterialPageRoute(builder: (context)=>LoginPage())),
+                  onTap: onTap,
                   child: Text(
                     "Login now",
                     style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Theme.of(context).colorScheme.primary
-                    ),
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).colorScheme.primary),
                   ),
                 )
               ],
             )
-
           ],
         ),
       ),
