@@ -13,10 +13,10 @@ class RegisterPage extends StatelessWidget {
   RegisterPage({super.key, required this.onTap});
 
   void register(BuildContext context) {
-    final _auth = AuthService();
+    final auth = AuthService();
     if(_passwordController.text == _confirmPasswordController.text){
       try{
-        _auth.signUpWithEmailAndPassword(
+        auth.signUpWithEmailAndPassword(
         _emailController.text, _passwordController.text);
       }catch(e){
         showDialog(
@@ -37,7 +37,7 @@ class RegisterPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
