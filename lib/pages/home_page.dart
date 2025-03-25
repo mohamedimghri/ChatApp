@@ -34,7 +34,8 @@ class HomePage extends StatelessWidget {
           }
           return ListView(
             children: snapshot.data!
-                .map<Widget>((userData) => _buildUserListItem(userData,context))
+                .map<Widget>(
+                    (userData) => _buildUserListItem(userData, context))
                 .toList(),
           );
         });
@@ -42,12 +43,20 @@ class HomePage extends StatelessWidget {
 
   Widget _buildUserListItem(
       Map<String, dynamic> userData, BuildContext context) {
-    return UserTile(
-      onTap: () {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => ChatPage(receiverEmail: userData["email"],)));
-      },
-      text: userData["email"],
-    );
+    if (userData["email"] != _authService.getCurrentUser()!.email) {
+      return UserTile(
+        onTap: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => ChatPage(
+                        receiverEmail: userData["email"],
+                      )));
+        },
+        text: userData["email"],
+      );
+    } else {
+      return Container();
+    }
   }
 }
